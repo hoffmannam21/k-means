@@ -69,7 +69,7 @@ class Centroids:
         min_dist = sys.maxsize
         for i, centroid in enumerate(self.data):
             dist = Point.dist(observation, centroid)
-            if (dist < min_dist):
+            if dist < min_dist:
                 min_dist = dist
                 index = i
         return index
@@ -160,7 +160,7 @@ class Observations:
         return [val[index] for val in self.data]
 
     def print(self):
-        print("Observations:");
+        print("Observations:")
         centroid_list = [[-1 for i in range(0, self.cols)] for j in range(0, self.rows)]
         labeled_data = np.append([self.header], self.data, axis=0)
         formatted_print(labeled_data)
@@ -168,7 +168,7 @@ class Observations:
 
     # converts cluster names such that...:
     # initial clustering:       [3, 3, 3, 0, 1]
-    # normalized clustering:    [0, 0, 0, 1, 2]
+    # normalized clustering:    [1, 1, 1, 2, 3]
     # for readability / data standardization
     def get_normalized_indices(self):
         new_indices = [-1 for i in range(0, len(self.data_centroids))]
@@ -239,7 +239,7 @@ class KMeans:
             total_iterations += 1
             print("Difference: " + str(difference))
             self.centroids.print()
-            if difference <= .00000001:
+            if difference <= tolerance:
                 print("\n" + ("*"*30) + " DONE " + ("*"*30) + "\n\n")
                 break
 
